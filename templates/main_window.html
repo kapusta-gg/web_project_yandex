@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<style>
+@font-face {
+    font-family: Comfortaa;
+    src: url(/static/font/Comfortaa-Bold.ttf);
+}
+
+body{color:#FFFFFF;
+    background:url('/static/img/back.jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Comfortaa;
+}
+
+
+section {
+  width: 200px;
+  outline: 1px dotted red;
+  height: 100px;
+  margin: auto;
+}
+
+
+header{
+    background: rgba(123, 104, 238, 0.5);
+    margin-top: -8px;
+    height: 85px;
+    width: 100%;
+}
+
+.content_block{
+    position: center;
+    text-align: center;
+    background: #543c88;
+    margin-top: 40px;
+    margin-left: 15%;
+    margin-bottom: 5%;
+    width: 70%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    border: solid white 1px;
+}
+a{
+    margin-top: 25px;
+    margin-left: 40px;
+}
+.inform_block {
+    background: rgba(196, 124, 223, 0.3);
+    position: fixed;
+    bottom: 0;
+    height: 40px;
+    width: 100%;
+}
+.badge-info{
+    margin-top: 10px;
+    margin-left: 46%;
+}
+img{
+    flex: 1;
+    height: 100%;
+    width: 50%;
+}
+.content {
+    background: #ebdcef;
+    display: flex;
+    padding: 2px;
+    border-radius: 10px;
+    border: solid 2px gray;
+    width: 80%;
+    height: 350px;
+    margin-left: 9%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    text-align: left;
+}
+.inform_content{
+    margin-left: 4px;
+    color:  #7c44f7;
+}
+.btn-outline-light{
+    background: #c47cdf;
+    margin-left: 40%;
+}
+</style>
+<body>
+<header>
+    {% if current_user.is_authenticated %}
+    <a class="btn btn-outline-success" href="/logout">{{ current_user.name }}</a>
+     <a class="btn btn-outline-light" href="/maker">Добавить свой трек</a>
+    {% else %}
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+            <a class="btn btn-outline-primary" href="/register">Зарегистрироваться</a>
+            <a class="btn btn-outline-warning" href="/login">Войти</a>
+        </div>
+    {% endif %}
+</header>
+
+<div class="content_block">
+    {% for item in content %}
+       <div class="content">
+       <img src={{ item.url_img }}><br>
+           <div class="inform_content">
+               <h1>{{ item.music_name }}</h1><br>
+               <h5>{{ item.music_author }}</h5><br>
+               <audio controls="controls">
+                   <source src={{ item.url_music }} type="audio/mpeg">
+               </audio>
+           </div>
+       </div>
+    {% endfor %}
+</div>
+
+
+<div class="inform_block">
+    <a href="/author_rights" class="badge badge-info">Авторские права</a>
+</div>
+</body>

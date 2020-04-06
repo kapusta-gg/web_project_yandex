@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<style>
+    @font-face {
+    font-family: Comfortaa;
+    src: url(/static/font/Comfortaa-Bold.ttf);
+    }
+
+    body{
+        background: url('/static/img/maker.jpg') no-repeat;
+        background-size: cover;
+        font-family: Comfortaa
+    }
+    div{
+        background: mediumorchid;
+        width: 800px;
+        height: 500px;
+        margin-top: 11%;
+        margin-left: 32%;
+        border-radius: 4px;
+    }
+    .submit{
+    margin-left: 47%;
+    margin-top: 20%;
+    }
+    .upload{
+        margin-left: 200px;
+        margin-bottom: 30px;
+    }
+    .str_inf{
+        margin-left: 4px;
+        margin-right: 4px;
+    }
+</style>
+<body>
+    <form action="" method="post">
+        <div>
+       {{ form.hidden_tag() }}
+        <p class="str_inf">
+            {{ form.author_name.label }}
+            {{ form.author_name(class="form-control") }}
+        </p>
+        <p class="str_inf">
+            {{ form.song_name.label }}
+            {{ form.song_name(class="form-control") }}
+        </p>
+        <p class="upload">
+            {{ form.image.label }}
+            {{ form.image() }}
+        </p>
+        <p class="upload">
+            {{ form.music.label }}
+            {{ form.music() }}
+        </p>
+        <p class="submit">
+           {{ form.submit(class="btn btn-light", type="submit") }}
+        </p>
+        {{ message }}
+         </div>
+    </form>
+</body>
