@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title_music }}-{{ title_author }}</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<style>
+    body{
+        background: #df88ef;
+    }
+    div{
+        width: 65%;
+        height: 85%;
+        background: blueviolet;
+        margin: 2% 17%;
+        border: solid white 1px;
+        color: white;
+    }
+    img{
+        width: 99%;
+        height: 600px;
+        margin: 5px;
+    }
+    input{
+        border-radius: 10px;
+        margin: 5px;
+    }
+    h2{
+        margin: 5px;
+    }
+    h1{
+        margin: 5px;
+    }
+    .text{
+        width: 65%;
+    }
+</style>
+<body>
+    <div>
+        <img src='/{{ data.url_img }}'><br>
+        <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
+        <h2>Автор поста: {{ user.name }}</h2><br>
+        <h1>Оставить комментарий:</h1>
+        <input class="text">
+        <input type="submit">
+    </div>
+</body>

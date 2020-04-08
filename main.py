@@ -25,7 +25,7 @@ def load_user(user_id):
 @app.route('/')
 def index():
     session = db_session.create_session()
-    return render_template('main_window.html', content=session.query(Content).all())
+    return render_template('main_page.html', content=session.query(Content).all())
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -93,9 +93,15 @@ def logout():
     logout_user()
     return redirect("/")
 
-@app.route('/music/<name_music>/<name_author>/<user_id>')
-def music_page(name_music, name_author, user_id):
-    return redirect('/music_page')
+@app.route('/music/<name_music>/<name_author>/<id>/<user_id>')
+def music_page(name_music, name_author, id, user_id):
+    session = db_session.create_session()
+    data_music = session.query(Content).filter(Content.user_id == user_id,
+                                               Content.id == id).first()
+    user = session.query(User).filter(User.id == id).first()
+    return render_template('music_page.html', title_music=name_music,
+                           title_author=name_author, data=data_music,
+                           user=user)
 
 
 if __name__ == '__main__':
