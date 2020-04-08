@@ -93,6 +93,10 @@ def logout():
     logout_user()
     return redirect("/")
 
+@app.route('/music/<name_music>/<name_author>/<user_id>')
+def music_page(name_music, name_author, user_id):
+    return redirect('/music_page')
+
 
 if __name__ == '__main__':
     db_session.global_init("db/blogs.sqlite")
