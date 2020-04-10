@@ -15,3 +15,4 @@ class Content(SqlAlchemyBase, UserMixin):
     url_img = sqlalchemy.Column(sqlalchemy.String, nullable=False)
     user_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey('users.id'))
     user = orm.relation('User')
+    commentary = orm.relation("Comments", back_populates='content')

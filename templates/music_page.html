@@ -10,7 +10,7 @@
 </head>
 <style>
     body{
-        background: #df88ef;
+        background: #ffffdc;
     }
     div{
         width: 65%;
@@ -38,10 +38,16 @@
     .text{
         width: 65%;
     }
+    audio{
+        margin-left: 37%;
+    }
 </style>
 <body>
     <div>
         <img src='/{{ data.url_img }}'><br>
+        <audio controls="controls">
+            <source src='/{{ data.url_music }}' type="audio/mpeg">
+        </audio>
         <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
         <h2>Автор поста: {{ user.name }}</h2><br>
         <h1>Оставить комментарий:</h1>
