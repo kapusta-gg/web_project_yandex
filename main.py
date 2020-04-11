@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_required, logout_user, login_user
 import flask_user
 
@@ -105,23 +105,27 @@ def music_page(name_music, name_author, id, user_id):
     data_music = session.query(Content).filter(Content.user_id == user_id,
                                                Content.id == id).first()
     user_post_name = session.query(User).filter(User.id == id).first()
-    comments= session.query(Comments).filter(Comments.content_id == id).all()
+    comments = session.query(Comments).filter(Comments.content_id == id).all()
 
     form = CommentsForm()
     if form.validate_on_submit():
         text = Comments(text=form.comment.data,
                         content_id=id,
-                        user_id=flask_user.current_user.name)
+                        user_name=flask_user.current_user.name)
         session.add(text)
         session.commit()
         return render_template('music_page.html', title_music=name_music,
                                title_author=name_author, data=data_music,
                                user=user_post_name, form=form,
-                               )
-    return render_template('music_page.html', title_music=name_music,
-                           title_author=name_author, data=data_music,
-                           user=user_post_name, form=form,
-                           )
+                               comments=comments)
+    if request.method == 'GET':
+        print(1)
+        comments = session.query(Comments).filter(Comments.content_id == id).all()
+
+        return render_template('music_page.html', title_music=name_music,
+                               title_author=name_author, data=data_music,
+                               user=user_post_name, form=form,
+                               comments=comments)
 
 
 if __name__ == '__main__':

@@ -9,8 +9,13 @@
           crossorigin="anonymous">
 </head>
 <style>
+    @font-face {
+    font-family: Comfortaa;
+    src: url(/static/font/Comfortaa-Bold.ttf);
+}
     body{
         background: #ffffdc;
+        font-family: Comfortaa;
     }
     div{
         width: 65%;
@@ -55,5 +60,11 @@
             {{ form.csrf_token }}
             {{ form.comment() }} {{ form.submit() }}
         </form>
+        {% for comment in comments %}
+        <div>
+            <h3>{{ comment.user_name }}</h3><br>
+            <h2>{{ comment.text }}</h2>
+        </div>
+        {% endfor %}
     </div>
 </body>
