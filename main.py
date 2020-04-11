@@ -1,14 +1,17 @@
 from flask import Flask, render_template, redirect
 from flask_login import LoginManager, login_required, logout_user, login_user
-from werkzeug.utils import secure_filename
-from math import ceil
+import flask_user
 
 from data import db_session
+
 from data.users import User
+from data.comments import Comments
 from data.content import Content
+
 from data.register import RegisterForm
 from data.login import LoginForm
 from data.content_maker import MakerForm
+from data.comments_form import CommentsForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'my_project'
@@ -75,6 +78,7 @@ def login():
                                form=form)
     return render_template('login.html', form=form)
 
+
 @app.route('/maker', methods=['GET', 'POST'])
 def maker():
     form = MakerForm()
@@ -83,7 +87,7 @@ def maker():
         if '.png' in form.image.name:
             return render_template('register.html',
                                    form=form,
-                                   message="Такой почта уже зарегестрирована")
+                                   message="Недопустимое расширение")
     return render_template('maker.html', form=form)
 
 
@@ -93,15 +97,31 @@ def logout():
     logout_user()
     return redirect("/")
 
-@app.route('/music/<name_music>/<name_author>/<id>/<user_id>')
+
+@app.route('/music/<name_music>/<name_author>/<id>/<user_id>', methods=['GET', 'POST'])
 def music_page(name_music, name_author, id, user_id):
+
     session = db_session.create_session()
     data_music = session.query(Content).filter(Content.user_id == user_id,
                                                Content.id == id).first()
-    user = session.query(User).filter(User.id == id).first()
+    user_post_name = session.query(User).filter(User.id == id).first()
+    comments= session.query(Comments).filter(Comments.content_id == id).all()
+
+    form = CommentsForm()
+    if form.validate_on_submit():
+        text = Comments(text=form.comment.data,
+                        content_id=id,
+                        user_id=flask_user.current_user.name)
+        session.add(text)
+        session.commit()
+        return render_template('music_page.html', title_music=name_music,
+                               title_author=name_author, data=data_music,
+                               user=user_post_name, form=form,
+                               )
     return render_template('music_page.html', title_music=name_music,
                            title_author=name_author, data=data_music,
-                           user=user)
+                           user=user_post_name, form=form,
+                           )
 
 
 if __name__ == '__main__':

@@ -51,7 +51,9 @@
         <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
         <h2>Автор поста: {{ user.name }}</h2><br>
         <h1>Оставить комментарий:</h1>
-        <input class="text">
-        <input type="submit">
+        <form action="" method="post">
+            {{ form.csrf_token }}
+            {{ form.comment() }} {{ form.submit() }}
+        </form>
     </div>
 </body>

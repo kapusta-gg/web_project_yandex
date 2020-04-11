@@ -19,6 +19,7 @@ class User(SqlAlchemyBase, UserMixin):
     hashed_password = sqlalchemy.Column(sqlalchemy.String,
                                         nullable=False)
     content = orm.relation("Content", back_populates='user')
+
     commentary = orm.relation("Comments", back_populates='user')
 
     def set_password(self, password):
