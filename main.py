@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_required, logout_user, login_user
 from werkzeug.utils import secure_filename
 from math import ceil
@@ -26,6 +26,19 @@ def load_user(user_id):
 def index():
     session = db_session.create_session()
     return render_template('main_window.html', content=session.query(Content).all())
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        text_search = request.form['search']
+    else:
+        text_search = ''
+    session = db_session.create_session()
+    session.query(Content).filter().all()
+    searching_objects = \
+        session.query(Content).filter(Content.music_author.like('%' + text_search + '%') | Content.music_name.like('%' + text_search + '%')).all()
+    return render_template('search.html', content=searching_objects)
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -74,6 +87,7 @@ def login():
                                message="Неправильный логин или пароль",
                                form=form)
     return render_template('login.html', form=form)
+
 
 @app.route('/maker', methods=['GET', 'POST'])
 def maker():

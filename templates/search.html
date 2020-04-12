@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet"
+          href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+          crossorigin="anonymous">
+</head>
+<style>
+    @font-face {
+        font-family: Comfortaa;
+        src: url(/static/font/Comfortaa-Bold.ttf);
+    }
+
+    body{color:#FFFFFF;
+        background:url('/static/img/back.jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Comfortaa;
+    }
+
+    header{
+        background: rgba(123, 104, 238, 0.5);
+        margin-top: -8px;
+        height: 85px;
+         width: 100%;
+    }
+    .content_block{
+    position: center;
+    text-align: center;
+    background: #543c88;
+    margin-top: 40px;
+    margin-left: 15%;
+    margin-bottom: 5%;
+    width: 70%;
+    border-collapse: collapse;
+    border-radius: 10px;
+    border: solid white 1px;
+    }
+    .inform_content{
+    margin-left: 4px;
+    color:  #7c44f7;
+    }
+    .content {
+    background: #ebdcef;
+    display: flex;
+    padding: 2px;
+    border-radius: 10px;
+    border: solid 2px gray;
+    width: 80%;
+    height: 350px;
+    margin-left: 9%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+    text-align: left;
+    }
+    img{
+    flex: 1;
+    height: 100%;
+    width: 50%;
+    }
+    input{
+        margin-top: 30px;
+    }
+    .btn_search {
+        width: 500px;
+        margin-left: 600px;
+    }
+</style>
+<body>
+    <header>
+        <div class="head">
+             <form method="POST">
+                  <input class="btn_search" type="search" name="search" placeholder="Поиск">
+                  <input type="submit" name="submit">
+             </form>
+         </div>
+    </header>
+    <div class="content_block">
+    {% for item in content %}
+       <div class="content">
+       <img src={{ item.url_img }}><br>
+           <div class="inform_content">
+               <h1>{{ item.music_name }}</h1><br>
+               <h5>{{ item.music_author }}</h5><br>
+               <audio controls="controls">
+                   <source src={{ item.url_music }} type="audio/mpeg">
+               </audio>
+           </div>
+       </div>
+    {% endfor %}
+</div>
+
+
+</body>
