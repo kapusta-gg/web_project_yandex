@@ -100,7 +100,6 @@ def logout():
 
 @app.route('/music/<name_music>/<name_author>/<id>/<user_id>', methods=['GET', 'POST'])
 def music_page(name_music, name_author, id, user_id):
-
     session = db_session.create_session()
     data_music = session.query(Content).filter(Content.user_id == user_id,
                                                Content.id == id).first()
@@ -114,18 +113,17 @@ def music_page(name_music, name_author, id, user_id):
                         user_name=flask_user.current_user.name)
         session.add(text)
         session.commit()
-        return render_template('music_page.html', title_music=name_music,
-                               title_author=name_author, data=data_music,
-                               user=user_post_name, form=form,
-                               comments=comments)
-    if request.method == 'GET':
-        print(1)
-        comments = session.query(Comments).filter(Comments.content_id == id).all()
+        return redirect('/' + '/'.join(['crutch', name_music, name_author, id, user_id]))
+    comments = session.query(Comments).filter(Comments.content_id == id).all()
+    return render_template('music_page.html', title_music=name_music,
+                           title_author=name_author, data=data_music,
+                           user=user_post_name, form=form,
+                           comments=comments)
 
-        return render_template('music_page.html', title_music=name_music,
-                               title_author=name_author, data=data_music,
-                               user=user_post_name, form=form,
-                               comments=comments)
+
+@app.route('/crutch/<name_music>/<name_author>/<id>/<user_id>')
+def crutch(name_music, name_author, id, user_id):
+    return redirect('/' + '/'.join(['music', name_music, name_author, id, user_id]))
 
 
 if __name__ == '__main__':

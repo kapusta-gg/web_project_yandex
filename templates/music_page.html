@@ -40,8 +40,8 @@
     h1{
         margin: 5px;
     }
-    .text{
-        width: 65%;
+    .commentary{
+        padding: 5px;
     }
     audio{
         margin-left: 37%;
@@ -61,8 +61,8 @@
             {{ form.comment() }} {{ form.submit() }}
         </form>
         {% for comment in comments %}
-        <div>
-            <h3>{{ comment.user_name }}</h3><br>
+        <div class="commentary">
+            <h1>{{ comment.user_name }}:</h1><br>
             <h2>{{ comment.text }}</h2>
         </div>
         {% endfor %}
