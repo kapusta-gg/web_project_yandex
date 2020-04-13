@@ -41,29 +41,14 @@
     }
 </style>
 <body>
-    <form action="" method="post">
+    <form action="" method="post" enctype=multipart/form-data>
         <div>
-       {{ form.hidden_tag() }}
-        <p class="str_inf">
-            {{ form.author_name.label }}
-            {{ form.author_name(class="form-control") }}
-        </p>
-        <p class="str_inf">
-            {{ form.song_name.label }}
-            {{ form.song_name(class="form-control") }}
-        </p>
-        <p class="upload">
-            {{ form.image.label }}
-            {{ form.image() }}
-        </p>
-        <p class="upload">
-            {{ form.music.label }}
-            {{ form.music() }}
-        </p>
-        <p class="submit">
-           {{ form.submit(class="btn btn-light", type="submit") }}
-        </p>
-        {{ message }}
-         </div>
+            <p>Имя автора\группы: <input type="text" name="author"></p>
+            <p>Название трека: <input type="text" name="song_name"></p>
+            <p>Изображение: <input type="file" name="img"></p>
+            <p>Трек: <input type="file" name="song"></p>
+            <input type="submit" value="Добавить">
+       {{ message }}
+       </div>
     </form>
 </body>
