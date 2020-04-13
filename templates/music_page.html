@@ -55,6 +55,7 @@
         </audio>
         <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
         <h2>Автор поста: {{ user.name }}</h2><br>
+        {% if current_user.is_authenticated %}
         <h1>Оставить комментарий:</h1>
         <form action="" method="post">
             {{ form.csrf_token }}
@@ -66,5 +67,8 @@
             <h2>{{ comment.text }}</h2>
         </div>
         {% endfor %}
+        {% else %}
+        Заругестрируйся или войди в аккаунт ;)
+        {% endif %}
     </div>
 </body>

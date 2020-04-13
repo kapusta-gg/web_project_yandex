@@ -90,13 +90,18 @@ a{
     background: #c47cdf;
     margin-left: 40%;
 }
+.btn-outline-dark{
+    background: #c47cdf;
+    margin-left: 90%;
+    margin-top: -60px;
+}
 </style>
 <body>
 <header>
     {% if current_user.is_authenticated %}
     <a class="btn btn-outline-success" href="/logout">{{ current_user.name }}</a>
     <a class="btn btn-outline-light" href="/maker">Добавить свой трек</a>
-    <a class="btn btn-outline-light" href="/search">Поиск</a>
+    <a class="btn btn-outline-dark" href="/search">Поиск</a>
     {% else %}
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <a class="btn btn-outline-primary" href="/register">Зарегистрироваться</a>

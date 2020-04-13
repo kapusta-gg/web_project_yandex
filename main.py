@@ -13,7 +13,6 @@ from data.content import Content
 
 from data.register import RegisterForm
 from data.login import LoginForm
-from data.content_maker import MakerForm
 from data.comments_form import CommentsForm
 
 app = Flask(__name__)
@@ -136,6 +135,8 @@ def maker():
                 )
                 session.add(content)
                 session.commit()
+            else:
+                return render_template('maker.html', message='Неправильный тип файла')
             return redirect('/')
     return render_template('maker.html')
 

@@ -26,19 +26,14 @@
         margin-top: 11%;
         margin-left: 32%;
         border-radius: 4px;
+        border: solid white 5px;
+        padding: 50px;
     }
-    .submit{
-    margin-left: 47%;
-    margin-top: 20%;
-    }
-    .upload{
-        margin-left: 200px;
+    p{
+        margin-left: 20%;
         margin-bottom: 30px;
     }
-    .str_inf{
-        margin-left: 4px;
-        margin-right: 4px;
-    }
+
 </style>
 <body>
     <form action="" method="post" enctype=multipart/form-data>
@@ -47,7 +42,7 @@
             <p>Название трека: <input type="text" name="song_name"></p>
             <p>Изображение: <input type="file" name="img"></p>
             <p>Трек: <input type="file" name="song"></p>
-            <input type="submit" value="Добавить">
+            <p><input type="submit" value="Добавить"></p>
        {{ message }}
        </div>
     </form>
