@@ -89,18 +89,24 @@ img{
     background: #c47cdf;
     margin-left: 40%;
 }
+.submit{
+    border: solid 1px  	#0000FF;
+    margin-left: 60%;
+    padding: 5px;
+}
 </style>
 <body>
 <header>
     {% if current_user.is_authenticated %}
     <a class="btn btn-outline-success" href="/logout">{{ current_user.name }}</a>
-     <a class="btn btn-outline-light" href="/maker">Добавить свой трек</a>
+    <a class="btn btn-outline-light" href="/maker">Добавить свой трек</a>
     {% else %}
         <div class="btn-group btn-group-toggle" data-toggle="buttons">
             <a class="btn btn-outline-primary" href="/register">Зарегистрироваться</a>
             <a class="btn btn-outline-warning" href="/login">Войти</a>
         </div>
     {% endif %}
+    <a class="submit" href="/search">Поиск</a>
 </header>
 
 <div class="content_block">

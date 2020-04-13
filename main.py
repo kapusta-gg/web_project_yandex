@@ -31,6 +31,19 @@ def index():
     return render_template('main_page.html', content=session.query(Content).all())
 
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        text_search = request.form['search']
+    else:
+        text_search = ''
+    session = db_session.create_session()
+    session.query(Content).filter().all()
+    searching_objects = \
+        session.query(Content).filter(Content.music_author.like('%' + text_search + '%') | Content.music_name.like('%' + text_search + '%')).all()
+    return render_template('search.html', content=searching_objects)
+
+
 @app.route('/register', methods=['GET', 'POST'])
 def registration():
     form = RegisterForm()
