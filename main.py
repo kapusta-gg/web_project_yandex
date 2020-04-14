@@ -1,5 +1,6 @@
 import os
 
+from PIL import Image
 from flask import Flask, render_template, redirect, request
 from flask_login import LoginManager, login_required, logout_user, login_user
 import flask_user
@@ -117,15 +118,26 @@ def maker():
         song_file = request.files['song']
         img_file = request.files['img']
         if song_file and img_file:
-            if ('.png' in img_file.filename) and ('.mp3' in song_file.filename):
+            if ('.png' in img_file.filename or '.jpg' in img_file.filename) and ('.mp3' in song_file.filename):
                 for i in [song_file, img_file]:
                     filename = secure_filename(i.filename)
+
+                    save_file = author + '_' + song_name + '.' + i.filename.rsplit('.', 1)[1]
+
                     i.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                     old_load_file = os.path.join(UPLOAD_FOLDER_INT, i.filename)
-                    new_load_file = os.path.join(UPLOAD_FOLDER_USERS,
-                                                 author + '_' + song_name + '.' + i.filename.rsplit('.', 1)[1])
-                    os.rename(old_load_file, new_load_file)
+                    new_load_file = os.path.join(UPLOAD_FOLDER_USERS, save_file)
+                    try:
+                        os.rename(old_load_file, new_load_file)
+                    except FileExistsError:
+                        pass
+
                 session = db_session.create_session()
+
+                if '.jpg' in img_file.filename:
+                    im = Image.open(UPLOAD_FOLDER_USERS + '/' + save_file)
+                    im.save(UPLOAD_FOLDER_USERS + '/' + author + '_' + song_name + '.png')
+
                 content = Content(
                     music_name=song_name,
                     music_author=author,

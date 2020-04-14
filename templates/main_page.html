@@ -113,12 +113,12 @@ a{
 <div class="content_block">
     {% for item in content %}
        <a class="content" href="/music/{{ item.music_name }}/{{ item.music_author }}/{{ item.id }}/{{ item.user_id }}">
-       <img src={{ item.url_img }}><br>
+       <img src='/{{ item.url_img }}'><br>
            <div class="inform_content">
                <h1>{{ item.music_name }}</h1><br>
                <h5>{{ item.music_author }}</h5><br>
                <audio controls="controls">
-                   <source src={{ item.url_music }} type="audio/mpeg">
+                   <source src='/{{ item.url_music }}' type="audio/mpeg">
                </audio>
            </div>
        </a>
