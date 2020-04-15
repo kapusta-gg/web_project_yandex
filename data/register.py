@@ -5,6 +5,7 @@ from wtforms.fields.html5 import EmailField
 from wtforms.validators import DataRequired
 
 
+# Форма регемтрации
 class RegisterForm(FlaskForm):
     email = EmailField('Почта', validators=[DataRequired()])
     name = StringField('Имя пользователя', validators=[DataRequired()])

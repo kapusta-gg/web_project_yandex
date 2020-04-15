@@ -5,6 +5,7 @@ from .db_session import SqlAlchemyBase
 from flask_login import UserMixin
 
 
+# Таблица комментариев
 class Comments(SqlAlchemyBase, UserMixin):
     __tablename__ = 'comments'
     id = sqlalchemy.Column(sqlalchemy.Integer, primary_key=True,
