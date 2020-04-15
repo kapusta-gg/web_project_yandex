@@ -17,7 +17,7 @@
         background: #ffffdc;
         font-family: Comfortaa;
     }
-    div{
+    .main, .commentary{
         width: 65%;
         height: 85%;
         background: blueviolet;
@@ -46,13 +46,22 @@
     audio{
         margin-left: 37%;
     }
+    a{
+        padding: 5px;
+        border-radius: 2px;
+        border: solid 1px white;
+        margin-left: 47%;
+    }
 </style>
 <body>
-    <div>
+    <div class="main">
         <img src='/{{ data.url_img }}'><br>
-        <audio controls="controls">
-            <source src='/{{ data.url_music }}' type="audio/mpeg">
-        </audio>
+        <div class="muisc_return">
+             <audio controls="controls">
+                 <source src='/{{ data.url_music }}' type="audio/mpeg">
+             </audio><br>
+             <a href="/">Домой</a>
+        </div>
         <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
         <h2>Автор поста: {{ user.name }}</h2><br>
         {% if current_user.is_authenticated %}

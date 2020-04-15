@@ -67,28 +67,36 @@
         width: 500px;
         margin-left: 600px;
     }
+    .home{
+        padding: 5px;
+        border-radius: 2px;
+        border: solid 1px white;
+        margin-left: 60px;
+        margin-top:  2%;
+    }
 </style>
 <body>
     <header>
         <div class="head">
              <form method="POST">
+                  <a href="/" class="home">Домой</a>
                   <input class="btn_search" type="search" name="search" placeholder="Поиск">
-                  <input type="submit" name="submit">
+                  <input type="submit" name="submit" value="Поиск">
              </form>
          </div>
     </header>
     <div class="content_block">
     {% for item in content %}
-       <div class="content">
-       <img src='/{{ item.url_img }}'><br>
-           <div class="inform_content">
-               <h1>{{ item.music_name }}</h1><br>
-               <h5>{{ item.music_author }}</h5><br>
-               <audio controls="controls">
-                   <source src={{ item.url_music }} type="audio/mpeg">
-               </audio>
-           </div>
-       </div>
+       <a class="content" href="/music/{{ item.music_name }}/{{ item.music_author }}/{{ item.id }}/{{ item.user_id }}">
+           <img src='/{{ item.url_img }}'><br>
+               <div class="inform_content">
+                   <h1>{{ item.music_name }}</h1><br>
+                   <h5>{{ item.music_author }}</h5><br>
+                   <audio controls="controls">
+                       <source src={{ item.url_music }} type="audio/mpeg">
+                   </audio>
+               </div>
+       </a>
     {% endfor %}
 </div>
 
