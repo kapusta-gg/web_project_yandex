@@ -7,95 +7,9 @@
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="/static/css/font.css" >
+    <link rel="stylesheet" type="text/css" href="/static/css/main_page.css" >
 </head>
-<style>
-@font-face {
-    font-family: Comfortaa;
-    src: url(/static/font/Comfortaa-Bold.ttf);
-}
-
-body{color:#FFFFFF;
-    background:url('/static/img/back.jpg') no-repeat center center fixed;
-    background-size: cover;
-    font-family: Comfortaa;
-}
-
-
-section {
-  width: 200px;
-  outline: 1px dotted red;
-  height: 100px;
-  margin: auto;
-}
-
-
-header{
-    background: rgba(123, 104, 238, 0.5);
-    margin-top: -8px;
-    height: 85px;
-    width: 100%;
-}
-
-.content_block{
-    position: center;
-    text-align: center;
-    background: #543c88;
-    margin-top: 40px;
-    margin-left: 20%;
-    margin-bottom: 5%;
-    width: 65%;
-    border-collapse: collapse;
-    border-radius: 10px;
-    border: solid white 1px;
-}
-
-.inform_block {
-    background: rgba(196, 124, 223, 0.3);
-    position: fixed;
-    bottom: 0;
-    height: 40px;
-    width: 100%;
-}
-.badge-info{
-    margin-top: 10px;
-    margin-left: 46%;
-}
-img{
-    flex: 1;
-    height: 100%;
-    width: 50%;
-}
-.content {
-    background: #ebdcef;
-    display: flex;
-    padding: 2px;
-    border-radius: 10px;
-    border: solid 2px gray;
-    width: 80%;
-    height: 350px;
-    margin-left: 9%;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    text-align: left;
-}
-a{
-    margin-top: 25px;
-    margin-left: 40px;
-}
-.inform_content{
-    margin-left: 4px;
-    color:  #7c44f7;
-}
-.btn-outline-light{
-    background: #c47cdf;
-    margin-left: 40%;
-}
-.btn-outline-dark{
-    background: #c47cdf;
-    margin-left: 90%;
-    margin-top: -60px;
-}
-</style>
 <body>
 <header>
     {% if current_user.is_authenticated %}

@@ -1,0 +1,18 @@
+body{
+    background: lightblue url('/static/img/back.jpg');
+    overflow: hidden;
+    font-family: Comfortaa
+}
+.main_block{
+    margin: 10% 35%;
+    background: #e100ff;
+    display: block;
+    border: 5px white solid;
+}
+.submit{
+    margin-left: 1%;
+}
+.data{
+    margin-right: 1%;
+    margin-left: 1%;
+}

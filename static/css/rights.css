@@ -1,0 +1,28 @@
+body{
+    background: lightblue url('/static/img/other_back.jpg');
+    overflow: hidden;
+    font-family: Comfortaa
+}
+.box_inform{
+    background: rgba(225, 0, 255, 0.5);
+    border-radius: 5px;
+    position: center;
+    margin-left: 30%;
+    color: white;
+    height: 900px;
+    width: 800px;
+}
+h4{
+    margin-left: 5%
+}
+.text_inform{
+    text-align: left;
+    position: center;
+    margin: 20px 100px;
+}
+.head{
+    background:#b054dc;
+    border-radius: 5px;
+    height: 40px;
+    font-size: 25px;
+}
