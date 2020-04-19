@@ -1,7 +1,7 @@
 import os
 
 from PIL import Image
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, send_file
 from flask_login import LoginManager, login_required, logout_user, login_user
 import flask_user
 from werkzeug.utils import secure_filename
@@ -37,7 +37,7 @@ def load_user(user_id):
 @app.route('/')
 def index():
     session = db_session.create_session()
-    return render_template('main_page.html', content=session.query(Content).all())
+    return render_template('main_page.html', content=reversed(session.query(Content).all()))
 
 # Страница поиска
 @app.route('/search', methods=['GET', 'POST'])
@@ -183,22 +183,21 @@ def music_page(name_music, name_author, id, user_id):
                         user_name=flask_user.current_user.name)
         session.add(text)
         session.commit()
-        # Специальный костыль
-        return redirect('/' + '/'.join(['crutch', name_music, name_author, id, user_id]))
+        # Снова открываем эту же страницу для отображения нового комментария
+        return redirect('/' + '/'.join(['music', name_music, name_author, id, user_id]))
     comments = session.query(Comments).filter(Comments.content_id == id).all()
     return render_template('music_page.html', title_music=name_music,
                            title_author=name_author, data=data_music,
                            user=user_post_name, form=form,
-                           comments=comments)
+                           comments=reversed(comments))
 
 
-# Данная страница нужна для того чтобы комментарий пользователя сразу
-# отображался на странице контента
-# Без этого костыля комментарий добавляеться в бд,
-# но не отображаеться на странице
-@app.route('/crutch/<name_music>/<name_author>/<id>/<user_id>')
-def crutch(name_music, name_author, id, user_id):
-    return redirect('/' + '/'.join(['music', name_music, name_author, id, user_id]))
+# Загрузка файла для пользователя
+@app.route('/download/<id>')
+def download_file(id):
+    session = db_session.create_session()
+    url = session.query(Content).filter(Content.id == id).first()
+    return send_file('/web/' + url.url_music, as_attachment=True)
 
 
 # Запуск сайта
