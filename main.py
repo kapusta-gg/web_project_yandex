@@ -173,8 +173,6 @@ def music_page(name_music, name_author, id, user_id):
     # Забираем все нужные данные
     data_music = session.query(Content).filter(Content.user_id == user_id,
                                                Content.id == id).first()
-    user_post_name = session.query(User).filter(User.id == id).first()
-
     # Добавляем комментарий пользователя в бд
     form = CommentsForm()
     if form.validate_on_submit():
@@ -188,8 +186,7 @@ def music_page(name_music, name_author, id, user_id):
     comments = session.query(Comments).filter(Comments.content_id == id).all()
     return render_template('music_page.html', title_music=name_music,
                            title_author=name_author, data=data_music,
-                           user=user_post_name, form=form,
-                           comments=reversed(comments))
+                           form=form, comments=reversed(comments))
 
 
 # Загрузка файла для пользователя

@@ -20,7 +20,7 @@
              <a href="/">Домой</a>
         </div>
         <h2>Музыкант/группа: {{ data.music_author }}; Название песни: {{ data.music_name }};</h2><br>
-        <h2>Автор поста: {{ user.name }}</h2><br>
+        <h2>Автор поста: {{ data.user_id }}</h2><br>
         {% if current_user.is_authenticated %}
         <a href="/download/{{ data.id }}">Скачать</a>
         <h1>Оставить комментарий:</h1>
