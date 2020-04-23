@@ -1,0 +1,39 @@
+body{
+    background: #ffffdc;
+    font-family: Comfortaa;
+}
+.main, .commentary{
+    width: 65%;
+    height: 85%;
+    background: blueviolet;
+    margin: 2% 17%;
+    border: solid white 1px;
+    color: white;
+}
+img{
+    margin: 0px 25%;
+    width: 600px;
+    height: 600px;
+}
+input{
+    border-radius: 10px;
+    margin: 5px;
+}
+h2{
+    margin: 5px;
+}
+h1{
+    margin: 5px;
+}
+.commentary{
+    padding: 5px;
+}
+audio{
+    margin-left: 37%;
+}
+a{
+    padding: 5px;
+    border-radius: 2px;
+    border: solid 1px white;
+    margin-left: 47%;
+}

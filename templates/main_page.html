@@ -8,7 +8,7 @@
           integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/static/css/font.css" >
-    <link rel="stylesheet" type="text/css" href="/static/css/main_page.css" >
+    <link rel="stylesheet" type="text/css" href="/static/css/pagemain.css" >
 </head>
 <body>
 <header>
@@ -27,7 +27,7 @@
 <div class="content_block">
     {% for item in content %}
        <a class="content" href="/music/{{ item.music_name }}/{{ item.music_author }}/{{ item.id }}/{{ item.user_id }}">
-       <img src='/{{ item.url_img }}'><br>
+       <img src='/static/users_content/{{ item.url_img }}'>
            <div class="inform_content">
                <h1>{{ item.music_name }}</h1><br>
                <h5>{{ item.music_author }}</h5><br>
