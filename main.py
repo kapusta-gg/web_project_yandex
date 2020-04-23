@@ -15,9 +15,10 @@ from data.login import LoginForm
 from data.comments_form import CommentsForm
 
 
+db_session.global_init('/home/kapustapepe/mysite/db/blogs.sqlite')
 # Создаем flask
 app = Flask(__name__, static_folder='static')
-UPLOAD_FOLDER_USERS = '/static/users_content'
+UPLOAD_FOLDER_USERS = '/home/kapustapepe/mysite/static/users_content'
 
 app.config['SECRET_KEY'] = 'my_project'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER_USERS
@@ -116,32 +117,35 @@ def maker():
         song_file = request.files['song']
         img_file = request.files['img']
         # проверяем файлы
-        if song_file and img_file:
-            if ('.png' in img_file.filename or '.jpg' in img_file.filename) and ('.mp3' in song_file.filename):
-                for i in [song_file, img_file]:
-                    # Переименовываем файлы для того чтобы они не накладывались друг на друга
+        if request.method == 'POST':
+            if song_file and img_file:
+                if ('.png' in img_file.filename or '.jpg' in img_file.filename) and ('.mp3' in song_file.filename):
+                    for i in [song_file, img_file]:
+                        # Переименовываем файлы для того чтобы они не накладывались друг на друга
 
-                    save_file = ''.join(author.split(' ')) + ''.join(song_name.split(' ')) + '.' + i.filename.rsplit('.', 1)[1]
-                    i.filename = save_file
+                        save_file = ''.join(author.split(' ')) + ''.join(song_name.split(' ')) + '.' + i.filename.rsplit('.', 1)[1]
+                        i.filename = save_file
 
-                    i.save(os.path.join(app.config['UPLOAD_FOLDER'], i.filename))
-                    i.save(os.path.join('/home/kapustapepe/files', i.filename))
+                        i.save(os.path.join(app.config['UPLOAD_FOLDER'], i.filename))
+                        i.save(os.path.join('/home/kapustapepe/', i.filename))
 
-                session = db_session.create_session()
+                    session = db_session.create_session()
 
-                # Добавляем в бд
-                content = Content(
-                    music_name=song_name,
-                    music_author=author,
-                    url_music=song_file.filename,
-                    url_img=img_file.filename,
-                    user_id=flask_user.current_user.name
-                )
-                session.add(content)
-                session.commit()
+                    # Добавляем в бд
+                    content = Content(
+                        music_name=song_name,
+                        music_author=author,
+                        url_music=song_file.filename,
+                        url_img=img_file.filename,
+                        user_id=flask_user.current_user.name
+                    )
+                    session.add(content)
+                    session.commit()
+                    return redirect('/')
+                else:
+                    return render_template('maker.html', message='Неправильный тип файла')
             else:
-                return render_template('maker.html', message='Неправильный тип файла')
-            return redirect('/')
+                return render_template('maker.html', message='Невыбран файл для загрузки')
     return render_template('maker.html')
 
 
@@ -181,10 +185,4 @@ def music_page(name_music, name_author, id, user_id):
 def download_file(id):
     session = db_session.create_session()
     url = session.query(Content).filter(Content.id == id).first()
-    return send_file('/home/kapustapepe/files/' + url.url_music, as_attachment=True)
-
-
-# Запуск сайта
-if __name__ == '__main__':
-    db_session.global_init("db/blogs.sqlite")
-    app.run(port=8080, host='127.0.0.1', debug=True)
+    return send_file('/home/kapustapepe/mysite/static/users_content/' + url.url_music, as_attachment=True)
